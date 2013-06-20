@@ -1,6 +1,7 @@
 (function($){
 
-
+	// jQuery plugin for the checklist generator interface
+	// appEngine
  	$.fn.appEngine = function()
 	{
 
@@ -9,12 +10,13 @@
 
 		var scriptUrl	= "../index.php";
 
- 		var get 	= function()
+		// Get specific actions from the server
+ 		var get 	= function(action)
 		{
  			return $.ajax({
 				url: scriptUrl,
 				type: "post",
-				data: {"action":"fetch"}
+				data: {"action":action}
 			});
  		};
 
@@ -37,6 +39,8 @@
 			
 		};
 
+		// Delete a specific data in the current element
+		// And send the action in ajax
 		objEngine.deleteEntry	=	function(id)
 		{
 			var toSend	=	new Array();
@@ -51,10 +55,12 @@
 			});	
 		};
 
+		// Refresh data in the current element
+		// And send the action in ajax
  		objEngine.refresh	=	function()
 		{
  				elem.html("");
- 				get().done(function(data){
+ 				get("fetch").done(function(data){
 	 				elem.append(data);
 	 				return false;
 				});
