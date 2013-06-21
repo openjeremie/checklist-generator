@@ -50,9 +50,7 @@
 
 		$torender = $list;
 		$template = $twig->loadTemplate('ajax.twig');
+
 	}
-	
-	
-	
 	echo $template->render(array('checklists' => $torender));
 

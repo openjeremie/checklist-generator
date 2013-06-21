@@ -61,9 +61,21 @@
 				 $(".row-selected").removeClass("row-selected");
 				 });
 
+	
+
+		$("tr").click(function(){
+			list.trigger("selectRow");
+		});
 		// Delete a row
-		list.on("click", cDelRowBt, function(){
-			list.deleteEntry("12");
+		//list.on("click", line.getHisElements(), function(){ 
+		//	alert("click line - " + this.id);
+		//});
+		list.find("tr").each(function(){
+			alert("lol");
+			$(this).on("click", cDelRowBt, function(){
+			alert($(this));
+			//list.deleteEntry($(this));
+		});
 		});
 
 		 cModDelRow.on("click", function(){

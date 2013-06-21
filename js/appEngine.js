@@ -10,6 +10,8 @@
 
 		var scriptUrl	= "../index.php";
 
+		var doc			= $(document);
+
 		// Get specific actions from the server
  		var get 	= function(action)
 		{
@@ -31,7 +33,7 @@
 		
 		objEngine.getHisElements =	function()
 		{
-			return elem.find("tr").find("td");
+			return elem.find("tr");
 		};
 
 		objEngine.addEntry		=	function()
@@ -50,7 +52,7 @@
 			toSend.push(id);
 
 			send(toSend).done(function(data){
-				alert(data);
+				alert(id);
 				//elem.remove();	
 			});	
 		};
@@ -62,11 +64,26 @@
  				elem.html("");
  				get("fetch").done(function(data){
 	 				elem.append(data);
+					elem.delegate("td","selectRow", function(e){
+							
+						alert("id:" + this.id);
+					});
 	 				return false;
 				});
  		};
-	
+
+		objEngine.ajaxReHandle = function(event, request, settings){
+		   $("body").append( "<p> - Event : " + event + " request :" + request + " settings :" + settings + "</p>" );
+		}
+			
+		elem.on("click", $("tr"), function(){
+			alert("test" + $.contains(elem, $("tr")));
+		});	
+
+
 		objEngine.refresh();
+
+		doc.ajaxComplete(objEngine.ajaxReHandle);
 
 		return objEngine;
 	};

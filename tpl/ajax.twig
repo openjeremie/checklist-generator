@@ -1,18 +1,19 @@
-                {% for itemcl in checklists %}
-				
-				<tr class="{% if itemcl.label is defined %} {{ itemcl.label.classbg }} {% endif %} delete-{{ itemcl.id }}" data-toggle="modal">
-                  <td><i class="icon-{{ itemcl.icon }}"></td>
-                  <td>{{ itemcl.name }}
-				  {% if itemcl.label is defined %}
-				  	<span class="label label-{{ itemcl.label.class }}">
-						{{ itemcl.label.status }}
-					</span>
-				  {% endif %}
-				  </td>
-                  <td>{{ itemcl.departement }}</td>
-                  <td>{{ itemcl.tache }}</td>
-                  <td>{{ itemcl.timeLastUpdate }}</td>
-                  <td><span class="pull-right"><a href="#"><i class="icon-edit"></i></a><button data-delete="{{ itemcl.id }}" data-toggle="modal" class="delete-row-bt close">&times;</button></span></td>
-                </tr>
-				{% endfor %}
+{% for itemcl in checklists %}
+
+<tr class="{% if itemcl.label is defined %} {{ itemcl.label.classbg }} {% endif %} delete-{{ itemcl.id }} line" id="{{ itemcl.id }}" data-toggle="modal">
+
+<td><i class="icon-{{ itemcl.icon }}"></td>
+<td>{{ itemcl.name }}
+{% if itemcl.label is defined %}
+<span class="label label-{{ itemcl.label.class }}">
+{{ itemcl.label.status }}
+</span>
+{% endif %}
+</td>
+<td>{{ itemcl.departement }}</td>
+<td>{{ itemcl.tache }}</td>
+<td>{{ itemcl.timeLastUpdate }}</td>
+<td><span class="pull-right"><a href="#"><i class="icon-edit"></i></a><button data-delete="{{ itemcl.id }}" data-toggle="modal" class="delete-row-bt close">&times;</button></span></td>
+</tr>
+{% endfor %}
 
