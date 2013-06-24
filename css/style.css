@@ -1,3 +1,11 @@
 #header{
 	
 }
+
+.debug{
+	color: red;
+	font-weight: bold;
+	border-left: 12px solid #345454;
+	margin-left: 12px;
+	padding-left: 6px;
+}

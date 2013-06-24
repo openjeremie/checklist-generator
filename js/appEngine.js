@@ -12,6 +12,13 @@
 
 		var doc			= $(document);
 
+		var debug		= true;
+
+		var iErrModal 	= $('#errorModal');
+		var bDelModal	= $('button.delete-row');
+
+		var aSynchr		= true;
+
 		// Get specific actions from the server
  		var get 	= function(action)
 		{
@@ -21,70 +28,111 @@
 				data: {"action":action}
 			});
  		};
-
+		
+		// Send data to server
 		var send	= function(data)
 		{
 			return $.ajax({
 				url:scriptUrl,
 				type: "post",
-				data: data
+				data: data,
+				async: aSynchr
 			});
 		};
-		
+	
+		// var_dump like
+		var debugDump = function(obj)
+		{
+			var outRequest = "";
+
+			for (var item in obj) {
+				var type = typeof(obj[item]);
+				outRequest += '[';
+				outRequest += type;
+				outRequest += '] : ';
+				outRequest += item;
+				outRequest += ' : ';
+				if (type.indexOf("object") >= 0) {
+					outRequest += debugDump(obj[item]);
+				} else {
+					outRequest += obj[item];
+				}
+				outRequest += '<br/>';
+			}
+
+			return outRequest;
+		};
+
 		objEngine.getHisElements =	function()
 		{
 			return elem.find("tr");
 		};
 
-		objEngine.addEntry		=	function()
+		objEngine.addEntry		=	function(el)
 		{
 			
+		};
+
+		objEngine.editEntry		=	function(el)
+		{
+			alert("edit " + el.id);	
 		};
 
 		// Delete a specific data in the current element
 		// And send the action in ajax
-		objEngine.deleteEntry	=	function(id)
+		objEngine.deleteEntry	=	function(el)
 		{
-			var toSend	=	new Array();
 			
-			toSend.push("action");
-			toSend.push("del");
-			toSend.push(id);
+			iErrModal.modal();
+			
+			aSynchr = false;
+			bDelModal.on("click", function(){
+			
+				var toSend	=	[];
+		
+				toSend.push(["action","del"]);
+				toSend.push(["id", el.id]);
 
-			send(toSend).done(function(data){
-				alert(id);
-				//elem.remove();	
-			});	
+				send(toSend).done(function(data){
+				$('#'+el.parentElement.id).remove();
+					aSynchr = true;
+				});	
+			});
 		};
 
-		// Refresh data in the current element
-		// And send the action in ajax
+		// Send the action in ajax
+		// and refresh data in the current element
  		objEngine.refresh	=	function()
 		{
  				elem.html("");
  				get("fetch").done(function(data){
 	 				elem.append(data);
-					elem.delegate("td","selectRow", function(e){
-							
-						alert("id:" + this.id);
+					elem.find("tr").children().each(function(){
+						$(this).bind('click', function(event){
+							fEventList[$(this).attr("data-action")](this);
+						});
 					});
-	 				return false;
 				});
+	 			return false;
  		};
 
-		objEngine.ajaxReHandle = function(event, request, settings){
-		   $("body").append( "<p> - Event : " + event + " request :" + request + " settings :" + settings + "</p>" );
+		objEngine.ajaxDebug = function(event, request, settings){
+		   $("#debug").prepend( '<p class="debug">[DEBUG AJAX] <br/>request status : ' + request.status + ' <br/> var : ' + settings.data  + '</p>' );
 		}
 			
-		elem.on("click", $("tr"), function(){
-			alert("test" + $.contains(elem, $("tr")));
-		});	
+		doc.ajaxComplete(function(e, r, s){
+			if (debug){
+				objEngine.ajaxDebug(e, r, s);
+			}
+		});
 
-
+		var fEventList	= {
+			"delete" 	: objEngine.deleteEntry,
+			"edit"		: objEngine.editEntry
+		};
+		
 		objEngine.refresh();
-
-		doc.ajaxComplete(objEngine.ajaxReHandle);
-
+		
 		return objEngine;
 	};
 

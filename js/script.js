@@ -62,22 +62,6 @@
 				 });
 
 	
-
-		$("tr").click(function(){
-			list.trigger("selectRow");
-		});
-		// Delete a row
-		//list.on("click", line.getHisElements(), function(){ 
-		//	alert("click line - " + this.id);
-		//});
-		list.find("tr").each(function(){
-			alert("lol");
-			$(this).on("click", cDelRowBt, function(){
-			alert($(this));
-			//list.deleteEntry($(this));
-		});
-		});
-
 		 cModDelRow.on("click", function(){
 				 $.get('../tpl/modals/checklist.twig', function(data) {
 					 iErrModal.modal();

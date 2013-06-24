@@ -13,7 +13,8 @@
 <td>{{ itemcl.departement }}</td>
 <td>{{ itemcl.tache }}</td>
 <td>{{ itemcl.timeLastUpdate }}</td>
-<td><span class="pull-right"><a href="#"><i class="icon-edit"></i></a><button data-delete="{{ itemcl.id }}" data-toggle="modal" class="delete-row-bt close">&times;</button></span></td>
+<td data-action="edit" id="edit-{{ itemcl.id }}"><i class="icon-list"></i></td>
+<td data-action="delete" id="delete-{{itemcl.id }}"><button data-toggle="modal" class="delete-row-bt close">&times;</button></td>
 </tr>
 {% endfor %}
 
