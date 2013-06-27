@@ -11,8 +11,15 @@
 {% endif %}
 </td>
 <td>{{ itemcl.departement }}</td>
-<td>{{ itemcl.tache }}</td>
+<td class="complete-case">
+	<div class="row-fluid row-complete">
+			{% for status in itemcl.completeClass %}
+			<div class="span4"><i class="icon-{{ status }}"></i></div>
+			{% endfor %}
+	</div>
+</td>
 <td>{{ itemcl.timeLastUpdate }}</td>
+<td>{{ itemcl.link }}</td>
 <td data-action="edit" id="edit-{{ itemcl.id }}"><i class="icon-list"></i></td>
 <td data-action="delete" id="delete-{{itemcl.id }}"><button data-toggle="modal" class="delete-row-bt close">&times;</button></td>
 </tr>

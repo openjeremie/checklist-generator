@@ -1,4 +1,10 @@
 (function($){
+		//'arrivee' 	=> 'forward',
+					//'depart'	=> 'backward',
+					//			'mobilite'	=> 'retweet',
+					//						'prolongation'	=> 'resize-horizontal',
+														//'absence'	=> 'time'
+
 
 	// jQuery plugin for the checklist generator interface
 	// appEngine
@@ -12,11 +18,12 @@
 
 		var doc			= $(document);
 
-		var debug		= true;
+		var debug		= false;
 
 		var iErrModal 	= $('#errorModal');
 		var bDelModal	= $('button.delete-row');
-
+		var iDisModal 	= $('#displayModal');
+		
 		var aSynchr		= true;
 
 		// Get specific actions from the server
@@ -59,10 +66,34 @@
 				}
 				outRequest += '<br/>';
 			}
-
 			return outRequest;
 		};
+		
+		// Réatache les événements aux éléments de la liste
+		var reBindList	= function()
+		{
+			// Parcour chaque case td de chaque ligne tr
+			elem.find("tr").children().each(function(){
 
+				// Tooltip TODO FIND SOMETHING ELSE
+				/*
+				$(".complete-case div").children().each(function(){
+					var tooltipHandle = $(this).find('a');
+
+					 if (tooltipHandle.hasClass("tooltip")){
+							tooltipHandle.bind('click', function(event){
+								$(this).tooltip();
+							});
+					 }
+				});
+				*/
+				// Autre cases
+				$(this).bind('click', function(event){
+					fEventList[$(this).attr("data-action")](this);
+				});
+			});
+		};
+		
 		objEngine.getHisElements =	function()
 		{
 			return elem.find("tr");
@@ -70,12 +101,23 @@
 
 		objEngine.addEntry		=	function(el)
 		{
-			
+			var nbEntry = elem.children().length + 1;
+
+			var toSend	=	"action=add&";
+			toSend += 'name=John+Doe&dep=DOS&tache=donner+un+bureau&type=';
+			toSend += $('form').find('input[name="type"]').val();
+			toSend += "&id=" + nbEntry;
+
+			send(toSend).done(function(data){
+				iDisModal.modal('hide');
+				elem.prepend(data);
+				reBindList();
+			});
 		};
 
 		objEngine.editEntry		=	function(el)
 		{
-			alert("edit " + el.id);	
+			alert("edit pop-up : " + el.id);	
 		};
 
 		// Delete a specific data in the current element
@@ -88,14 +130,12 @@
 			aSynchr = false;
 			bDelModal.on("click", function(){
 			
-				var toSend	=	[];
+				var toSend	= "action=del&id=" + el.id;
 		
-				toSend.push(["action","del"]);
-				toSend.push(["id", el.id]);
-
 				send(toSend).done(function(data){
-				$('#'+el.parentElement.id).remove();
+					$('#'+el.parentElement.id).remove();
 					aSynchr = true;
+					iErrModal.modal('hide');
 				});	
 			});
 		};
@@ -107,18 +147,44 @@
  				elem.html("");
  				get("fetch").done(function(data){
 	 				elem.append(data);
-					elem.find("tr").children().each(function(){
-						$(this).bind('click', function(event){
-							fEventList[$(this).attr("data-action")](this);
-						});
-					});
+					reBindList();
 				});
 	 			return false;
  		};
 
-		objEngine.ajaxDebug = function(event, request, settings){
+		
+		objEngine.refreshEventElement	=	function(el)
+		{
+			el.on("click", objEngine.getHisElements(), function(e){
+				objEngine.refresh();
+			});
+		};
+
+		objEngine.addEventElement		=	function(el)
+		{
+			el.find("li a").each(function(){
+
+				$(this).bind('click', function(e){
+					var name = $(this).attr("href");
+
+					var toSend = "action=getmodal&name="+name;
+				
+					send(toSend).done(function(data){
+						iDisModal.html("");
+						iDisModal.modal().append(data);
+						$(".modal-footer .btn-primary").bind('click', function(e){
+							fEventList['add'](iDisModal);	
+						});
+					}).success(function(){
+						$('input:text:visible:first').focus(); 
+					});
+				});
+			});
+		};
+		
+		objEngine.ajaxDebug 			= function(event, request, settings){
 		   $("#debug").prepend( '<p class="debug">[DEBUG AJAX] <br/>request status : ' + request.status + ' <br/> var : ' + settings.data  + '</p>' );
-		}
+		};
 			
 		doc.ajaxComplete(function(e, r, s){
 			if (debug){
@@ -128,7 +194,8 @@
 
 		var fEventList	= {
 			"delete" 	: objEngine.deleteEntry,
-			"edit"		: objEngine.editEntry
+			"edit"		: objEngine.editEntry,
+			"add"		: objEngine.addEntry
 		};
 		
 		objEngine.refresh();

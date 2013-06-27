@@ -9,3 +9,15 @@
 	margin-left: 12px;
 	padding-left: 6px;
 }
+
+.row-complete{}
+.row-complete div{
+	text-align: center;
+}
+.row-complete div i{}
+.row-complete div i.icon-refresh{
+	color: red;
+}
+.row-complete div i.icon-ok{
+	color: green;
+}

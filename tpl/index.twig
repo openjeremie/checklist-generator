@@ -9,6 +9,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="css/datepicker.css" rel="stylesheet" media="screen">
+    <link href="css/font-awesome.css" rel="stylesheet" media="screen">
     <link href="css/style.css" rel="stylesheet" media="screen">
 	{% endblock %}
   </head>
@@ -48,11 +49,11 @@
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a href="../tpl/modals/arrivee.twig" data-target="#" data-toggle="modal"><i class="icon-forward"></i> Arrivée</a></li>
-                <li><a href="../tpl/modals/depart.twig" data-target="#" data-toggle="modal"><i class="icon-backward"></i> Départ</a></li>
-                <li><a href="../tpl/modals/mobilite.twig" data-target="#" data-toggle="modal"><i class="icon-retweet"></i> Mobilité</a></li>
-                <li><a href="../tpl/modals/prolongation.twig" data-target="#" data-toggle="modal"><i class="icon-resize-horizontal"></i> Prolongation</a></li>
-                <li><a href="../tpl/modals/absence.twig" data-target="#" data-toggle="modal"><i class="icon-time"></i> Absence</a></li>
+                <li><a href="arrivee" data-action="add" data-target="#" data-toggle="modal"><i class="icon-forward"></i> Arrivée</a></li>
+                <li><a href="depart" data-action="add" data-target="#" data-toggle="modal"><i class="icon-backward"></i> Départ</a></li>
+                <li><a href="mobilite" data-action="add" data-target="#" data-toggle="modal"><i class="icon-retweet"></i> Mobilité</a></li>
+                <li><a href="prolongation" data-action="add" data-target="#" data-toggle="modal"><i class="icon-resize-horizontal"></i> Prolongation</a></li>
+                <li><a href="absence" data-action="add" data-target="#" data-toggle="modal"><i class="icon-time"></i> Absence</a></li>
               </ul>
             </div>
           </div>
@@ -66,8 +67,9 @@
                   <th></th>
                   <th>Nom</th>
                   <th>Département</th>
-                  <th>Tâche</th>
+                  <th>Complétion</th>
                   <th>Dernière modification</th>
+                  <th>Lien checklist</th>
                   <th></th>
                   <th></th>
                 </tr>
@@ -108,10 +110,10 @@
       </div>
     </div>
 	<div id="debug"></div>
-    <script src="js/jquery.tmp.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
-    <script src="js/appEngine.js"></script>
-    <script src="js/script.js"></script>
+    <script type="text/javascript" src="js/jquery.tmp.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-datepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="js/appEngine.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>

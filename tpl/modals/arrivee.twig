@@ -1,11 +1,87 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Créer une nouvel absence</h3>
+    <h3 id="myModalLabel">Création arrivée</h3>
 </div>
 <div class="modal-body">
-    <p>One fine body…</p>
+	<form class="form-horizontal" id="form-check">
+		<fieldset>
+    		<legend>(alpha)</legend>
+			<input type="hidden" name="type" value="arrivee" id="add" />
+			<div class="control-group">
+				<label class="control-label" for="inputName">Nom</label>
+				<div class="controls">
+					<input type="text" name="nom" id="inputName" class="input-xlarge" required />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputFirstName">Prénom</label>
+				<div class="controls">
+					<input type="text" name="prenom" id="inputFirstName" class="input-xlarge" required />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="dp1">Date d'arrivée</label>
+				<div class="controls">
+					<div class="input-append date datepicker" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+						<input id="dp1" class="span2" size="16" type="text" name="date-arrivee" value="12-02-2012" required >
+				 		<span class="add-on"><i class="icon-th"></i></span>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="dp2">Date départ</label>
+				<div class="controls">
+					<div class="input-append date datepicker" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+						<input id="dp2" class="span2" size="16" type="text" name="date-depart" value="12-02-2012" required >
+				 		<span class="add-on"><i class="icon-th"></i></span>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputInCharge">Responsable</label>
+				<div class="controls">
+					<input type="text" name="responsable" id="inputInCharge" class="input-xlarge" required />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="selectDirection">Direction</label>
+				<div class="controls">
+					<select id="selectDirection" class="input-xlarge" name="direction">
+						<option>...</option>
+						<option>DT</option>
+						<option>DOS</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="selectDepartement">Departement</label>
+				<div class="controls">
+					<select id="selectDepartement" class="input-xlarge" name="direction">
+						<option>...</option>
+						<option>Departement1</option>
+						<option>Departement2</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputJob">Fonction</label>
+				<div class="controls">
+					<input type="text" name="fonction" id="inputJob" class="input-xlarge" required />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputOffice">Bureau</label>
+				<div class="controls">
+					<input type="text" name="bureau" id="inputInCharge" class="input-xlarge" required />
+				</div>
+			</div>
+		</fieldset>
+	</form>
 </div>
 <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
-    <button class="btn btn-primary">Créer</button>
+    <button class="btn btn-primary" id="form-send">Créer</button>
 </div>
+<script>
+		$(".datepicker").datepicker();
+</script>
