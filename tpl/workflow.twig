@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	{% block head %}
+		<title>{% block title %}{% endblock %} Workflow GAS - WIP</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+		<!-- Bootstrap -->
+		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+		<link href="css/datepicker.css" rel="stylesheet" media="screen">
+		<link href="css/font-awesome.css" rel="stylesheet" media="screen">
+		<link href="css/style.css" rel="stylesheet" media="screen">
+	{% endblock %}
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row-fluid complete" id="information">
+					<div class="span3"></div>
+					<div class="span6">
+						<div class="row-fluid well">
+							<div class="span8">
+								<h1>John Doe <small>DT/SI/PR</small></h1>
+							</div>
+							<div class="span4">
+								<h2><i class="icon-forward"></i>Arrivée</h2>
+							</div>
+						</div>
+						<div class="row-flui">
+							<h3>Administrateur Système</h3>
+						</div>
+						<div class="row-fluid">
+							<div class="span6">
+								<p><b>Date arrivée :</b> 42 avril 2042<p>
+							</div>
+							<div class="span6">
+								<p><b>Date départ :</b> 42 avril 2042<p>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span6">
+								<p><b>Responsable :</b> John Doe père</p>
+							</div>
+							<div class="span6">
+								<p><b>Date de la demande :</b> 42 avril 2042</p>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span6">
+								<p><b>Type de contrat :</b> Sous-traitant</p>
+							</div>
+							<div class="span6">
+								<p><b>Bureau :</b> A4242</p>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span6">
+								<p><b>Date de naissance :</b> 42 Avril 1942</p>
+							</div>
+							<div class="span6">
+								<p><b>Nationalité:</b> Française</p>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span12">
+								<p><b>Commentaire :</b></p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquam massa tortor, in accumsan nunc placerat vitae. Quisque cursus egestas ipsum, vel porttitor nunc pharetra vel. Integer rutrum aliquet neque, eu facilisis odio tincidunt non. Integer blandit iaculis mollis. Nam sit amet blandit magna, et mattis neque. Nunc sollicitudin tincidunt purus, eu vulputate magna commodo imperdiet. Vivamus porta tempor dapibus.</p>
+							</div>
+						</div>
+						<br/>
+						<br/>
+						<h2><i class="icon-check"></i>Actions à valider :</h2>
+						<br/>
+						<div class="row-fluid">
+							<form class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label" for="badge-cnes">Badge Cnes</label>
+									<select multiple="multiple" id="badge-cnes">
+									  <option>AB</option>
+									  <option>Batiment C</option>
+									  <option>Datacenter</option>
+								      <option>Centre Informatique</option>
+									  <option>Salle recette</option>
+									</select>
+								</div>
+								<div class="control-group">
+									<label class="checkbox inline">
+										<input type="checkbox" value="">
+										  Inscription au restaurant
+									</label>
+									<label class="checkbox inline">
+										<input type="checkbox" value="">
+										  Affichage bureau
+									</label>
+									<label class="checkbox inline">
+										<input type="checkbox" value="">
+										  Circuit arrivée
+									</label>
+									<label class="checkbox inline">
+										<input type="checkbox" value="">
+										  Enregistrement
+									</label>
+									<label class="checkbox inline">
+										<input type="checkbox" value="">
+										  Photo
+									</label>
+								</div>
+								<button class="btn btn-large btn-block btn-primary" type="button">Sauvegarder</button>
+							</form>
+						</div>
+						<br/>
+						<br/>
+						<div class="row-fluid">
+							<form class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label" for="nb-cle">Clé</label>
+									<div class="controls">
+										<input type="text" id="nb-cle" placeholder="Numéro de cle" required>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="telephone">Téléphone</label>
+									<div class="controls">
+										<input type="text" id="telephone" placeholder="Numéro" required>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="nb-badge">Badge</label>
+									<div class="controls">
+										<input type="text" id="nb-badge" placeholder="Numéro de Badge" required>
+										<br/>
+										<br/>
+										<label class="checkbox">
+										<input type="checkbox" value="">
+										  Mobilier
+										</label>
+									</div>
+								</div>
+								<button class="btn btn-large btn-block btn-primary" type="button">Sauvegarder</button>
+							</form>
+						</div>
+						<br/>
+						<br/>
+						<div class="row-fluid">
+							<form class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label" for="poste-existant">Poste exitant ?</label>
+									<div class="controls">
+										<input type="text" id="poste-existant" placeholder="Nom pc, Numéro de série ..." required>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="poste">Nouveau poste </label>
+									<select id="poste">
+									  <option>Fixe</option>
+									  <option>portable</option>
+									</select>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="os">O.S </label>
+									<select id="os">
+									  <option>Windows</option>
+									  <option>Linux 32bits</option>
+									  <option>Linux 64bits</option>
+									</select>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="logiciel">Logiciel</label>
+									<select multiple="multiple" id="os">
+									  <option>Adobe Reader</option>
+									  <option>Photoshop</option>
+									  <option>Acrobat</option>
+									  <option>Logiciel 1</option>
+									  <option>Logiciel 2</option>
+									  <option>Logiciel 3</option>
+									  <option>Logiciel 4</option>
+									</select>
+								</div>
+								<button class="btn btn-large btn-block btn-primary" type="button">Sauvegarder</button>
+							</form>
+						</div>
+					</div>
+					<div class="span3"></div>
+			</div>
+		</div>
+	</body>
+</html>
+

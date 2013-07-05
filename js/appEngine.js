@@ -104,8 +104,15 @@
 			var nbEntry = elem.children().length + 1;
 
 			var toSend	=	"action=add&";
-			toSend += 'name=John+Doe&dep=DOS&tache=donner+un+bureau&type=';
-			toSend += $('form').find('input[name="type"]').val();
+			toSend += 'nom=' + $('form').find('input[name="nom"]').val();
+			toSend += '&prenom=' + $('form').find('input[name="prenom"]').val();
+			toSend += '&id_direction=' + $('form').find('select[name="direction"]').val();
+			toSend += '&id_departement=' + $('form').find('select[name="departement"]').val();
+			toSend += '&id_activite=' + $('form').find('select[name="activite"]').val();
+			toSend += '&responsable_uid=' + $('form').find('input[name="responsable_uid"]').val();
+			toSend += '&fonction=' + $('form').find('select[name="fonction"]').val();
+			toSend += '&type=' + $('form').find('input[name="type"]').val();
+			toSend += '&id_type_contrat=' + $('form').find('select[name="contrat"]').val();
 			toSend += "&id=" + nbEntry;
 
 			send(toSend).done(function(data){
